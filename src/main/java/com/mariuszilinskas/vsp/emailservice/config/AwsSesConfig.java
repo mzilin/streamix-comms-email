@@ -1,7 +1,6 @@
 package com.mariuszilinskas.vsp.emailservice.config;
 
 import com.amazonaws.auth.AWSCredentials;
-import com.amazonaws.auth.AWSCredentialsProvider;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.simpleemail.AmazonSimpleEmailService;
@@ -20,16 +19,12 @@ public class AwsSesConfig {
     private String secretKey;
 
     @Bean
-    public AmazonSimpleEmailService getAmazonSimpleEmailService() {
+    public AmazonSimpleEmailService sesClient() {
+        AWSCredentials awsCredentials = new BasicAWSCredentials(accessKey, secretKey);
         return AmazonSimpleEmailServiceClientBuilder.standard()
-                .withCredentials(getAwsCredentialProvider())
+                .withCredentials(new AWSStaticCredentialsProvider(awsCredentials))
                 .withRegion("ap-southeast-1")
                 .build();
-    }
-
-    private AWSCredentialsProvider getAwsCredentialProvider() {
-        AWSCredentials awsCredentials = new BasicAWSCredentials(accessKey, secretKey);
-        return new AWSStaticCredentialsProvider(awsCredentials);
     }
 
 }

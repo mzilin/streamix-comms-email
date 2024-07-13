@@ -1,0 +1,63 @@
+# Server properties
+server:
+  port: 8094
+
+# Information for the info endpoint
+info:
+  app:
+    environment: DEV
+    name: Email Service
+    description: Email Service Local Instance
+
+# Spring application properties
+spring:
+  application:
+    name: emails
+  profiles:
+    active: dev
+  config:
+    import:
+      - optional:configserver:${CONFIG_SERVER_URL}
+      - optional:file:./env.properties
+  rabbitmq:
+    host: ${RMQ_HOST}
+    port: ${RMQ_PORT}
+    username: ${RMQ_USERNAME}
+    password: ${RMQ_PASSWORD}
+
+# AWS configuration
+aws:
+  accessKey: ${AWS_ACCESS_KEY}
+  secretKey: ${AWS_SECRET_KEY}
+
+# Eureka configuration
+eureka:
+  client:
+    fetchRegistry: true
+    registerWithEureka: true
+    serviceUrl:
+      defaultZone: ${EUREKA_CLIENT_DEFAULT_ZONE}
+  instance:
+    preferIpAddress: true
+
+# RabbitMQ settings
+rabbitmq:
+  exchange: ${RMQ_EXCHANGE}
+  queues:
+    platform-emails: ${RMQ_PLATFORM_EMAILS_Q}
+
+# Management properties
+management:
+  info:
+    env:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: info, health, refresh
+
+logging:
+  level:
+    root: INFO
+    org.springframework.web: DEBUG
+    org.springframework.security: DEBUG

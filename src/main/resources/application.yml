@@ -45,7 +45,8 @@ rabbitmq:
   exchange: ${RMQ_EXCHANGE}
   queues:
     platform-emails: ${RMQ_PLATFORM_EMAILS_Q}
-
+  routing-keys:
+    platform-emails: ${RMQ_PLATFORM_EMAILS_RK}
 # Management properties
 management:
   info:

@@ -1,0 +1,8 @@
+<body th:insert="~{base :: body}">
+<div th:fragment="content">
+    <p>Dear <span th:text="${firstName}"></span>,</p>
+    <p>Please verify your account by entering this passcode:</p>
+    <p style="font-weight: bold;" th:text="${passcode}"></p>
+    <p>This code will only be valid for 15 minutes.</p>
+</div>
+</body>

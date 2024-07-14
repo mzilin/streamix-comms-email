@@ -14,5 +14,6 @@ public class VerifyEmailRequest extends EmailRequest {
 
     @NotBlank(message = "passcode cannot be blank")
     private String passcode;
+
 }
 

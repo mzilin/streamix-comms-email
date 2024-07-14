@@ -14,5 +14,6 @@ public class ResetPasswordRequest extends EmailRequest {
 
     @NotBlank(message = "resetToken cannot be blank")
     private String resetToken;
+
 }
 

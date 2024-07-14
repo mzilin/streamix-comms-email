@@ -16,12 +16,13 @@ public class EmailRequest {
     @NotBlank(message = "type cannot be blank")
     private String type;
 
-    @NotBlank(message = "name cannot be blank")
+    @NotBlank(message = "firstName cannot be blank")
     private String firstName;
 
     @NotBlank(message = "email cannot be blank")
     @Email(message = "email should be valid")
     private String email;
+
 }
 
 

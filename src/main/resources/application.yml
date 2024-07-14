@@ -29,6 +29,16 @@ spring:
 aws:
   accessKey: ${AWS_ACCESS_KEY}
   secretKey: ${AWS_SECRET_KEY}
+  ses:
+    region: ${AWS_SES_REGION}
+
+# Email configuration
+email:
+  fromEmail: ${FROM_EMAIL}
+
+# Frontend configuration
+frontend:
+  baseUrl: ${FRONTEND_BASE_URL}
 
 # Eureka configuration
 eureka:
@@ -45,7 +55,8 @@ rabbitmq:
   exchange: ${RMQ_EXCHANGE}
   queues:
     platform-emails: ${RMQ_PLATFORM_EMAILS_Q}
-
+  routing-keys:
+    platform-emails: ${RMQ_PLATFORM_EMAILS_RK}
 # Management properties
 management:
   info:

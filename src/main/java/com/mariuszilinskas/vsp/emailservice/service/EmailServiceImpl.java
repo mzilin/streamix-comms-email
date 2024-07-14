@@ -47,7 +47,6 @@ public class EmailServiceImpl implements EmailService {
     public void sendWelcomeEmail(EmailRequest request) {
         ModelMap model = initialiseModelMap(request);
         String body = buildEmail("welcome.html", model);
-
         sendEmail("Welcome", request.getEmail(), "Welcome to VSP!", body);
     }
 

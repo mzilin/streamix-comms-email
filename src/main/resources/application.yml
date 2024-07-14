@@ -36,6 +36,10 @@ aws:
 email:
   fromEmail: ${FROM_EMAIL}
 
+# Frontend configuration
+frontend:
+  baseUrl: ${FRONTEND_BASE_URL}
+
 # Eureka configuration
 eureka:
   client:

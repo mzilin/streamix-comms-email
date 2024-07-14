@@ -31,6 +31,9 @@ public class EmailServiceImpl implements EmailService {
     @Value("${email.fromEmail}")
     private String fromEmail;
 
+    @Value("${frontend.baseUrl}")
+    private String baseUrl;
+
     @Override
     public void sendVerifyAccountEmail(VerifyEmailRequest request) {
         ModelMap model = initialiseModelMap(request);
@@ -43,7 +46,7 @@ public class EmailServiceImpl implements EmailService {
     @Override
     public void sendWelcomeEmail(EmailRequest request) {
         ModelMap model = initialiseModelMap(request);
-        String body = buildEmail("welcomeEmail.html", model);
+        String body = buildEmail("welcome.html", model);
 
         sendEmail("Welcome", request.getEmail(), "Welcome to VSP!", body);
     }
@@ -51,7 +54,8 @@ public class EmailServiceImpl implements EmailService {
     @Override
     public void sendResetPasswordEmail(ResetPasswordRequest request) {
         ModelMap model = initialiseModelMap(request);
-        model.addAttribute("resetToken", request.getResetToken());
+        String resetLink = baseUrl + "/reset-password?token=" + request.getResetToken();
+        model.addAttribute("resetLink", resetLink);
 
         String body = buildEmail("resetPassword.html", model);
         sendEmail("Reset Password", request.getEmail(), "Reset Your Password", body);

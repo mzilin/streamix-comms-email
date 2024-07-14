@@ -37,7 +37,6 @@ dependencies {
 	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
 
 	// Email and Template related
-	implementation 'org.springframework.boot:spring-boot-starter-mail'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation group: 'com.amazonaws', name: 'aws-java-sdk-ses', version: '1.12.760'
 

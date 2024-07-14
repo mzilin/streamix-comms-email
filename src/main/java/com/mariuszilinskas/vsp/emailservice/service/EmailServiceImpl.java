@@ -63,7 +63,7 @@ public class EmailServiceImpl implements EmailService {
 
     private ModelMap initialiseModelMap(EmailRequest request) {
         ModelMap model = new ModelMap();
-        model.addAttribute("token", request.getFirstName());
+        model.addAttribute("firstName", request.getFirstName());
         model.addAttribute("email", request.getEmail());
         return model;
     }

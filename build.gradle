@@ -35,7 +35,6 @@ dependencies {
 	// Spring Cloud-related
 	implementation 'org.springframework.cloud:spring-cloud-starter-config'
 	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
-	implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
 
 	// Email and Template related
 	implementation 'org.springframework.boot:spring-boot-starter-mail'
@@ -44,7 +43,6 @@ dependencies {
 
 	// Other dependencies
 	implementation 'org.jetbrains:annotations:24.0.1'
-	implementation 'io.github.openfeign:feign-jackson'
 
 	// Lombok
 	compileOnly 'org.projectlombok:lombok'

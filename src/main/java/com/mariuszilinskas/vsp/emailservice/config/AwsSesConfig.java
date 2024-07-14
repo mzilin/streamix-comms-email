@@ -18,12 +18,15 @@ public class AwsSesConfig {
     @Value("${aws.secretKey}")
     private String secretKey;
 
+    @Value("${aws.ses.region}")
+    private String region;
+
     @Bean
     public AmazonSimpleEmailService sesClient() {
         AWSCredentials awsCredentials = new BasicAWSCredentials(accessKey, secretKey);
         return AmazonSimpleEmailServiceClientBuilder.standard()
                 .withCredentials(new AWSStaticCredentialsProvider(awsCredentials))
-                .withRegion("ap-southeast-1")
+                .withRegion(region)
                 .build();
     }
 

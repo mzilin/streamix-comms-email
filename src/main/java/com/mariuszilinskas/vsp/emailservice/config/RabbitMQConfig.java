@@ -30,7 +30,7 @@ public class RabbitMQConfig {
     }
 
     @Bean
-    public Binding createPasscodeBinding() {
+    public Binding createPlatformEmailsBinding() {
         return BindingBuilder.bind(platformEmailsQueue())
                 .to(exchange())
                 .with(platformEmailsRoutingKey);

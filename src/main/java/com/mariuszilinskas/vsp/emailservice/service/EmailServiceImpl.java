@@ -74,6 +74,8 @@ public class EmailServiceImpl implements EmailService {
     }
 
     private void sendEmail(String type, String to, String subject, String body) {
+        String fromFormatted = "VSP <" + fromEmail + ">";
+
         Destination destination = new Destination().withToAddresses(to);
         Content subjectContent = new Content().withCharset("UTF-8").withData(subject);
         Content htmlBodyContent = new Content().withCharset("UTF-8").withData(body);
@@ -86,7 +88,7 @@ public class EmailServiceImpl implements EmailService {
         SendEmailRequest sendEmailRequest = new SendEmailRequest()
                 .withDestination(destination)
                 .withMessage(message)
-                .withSource(fromEmail);
+                .withSource(fromFormatted);
 
         try {
             sesClient.sendEmail(sendEmailRequest);

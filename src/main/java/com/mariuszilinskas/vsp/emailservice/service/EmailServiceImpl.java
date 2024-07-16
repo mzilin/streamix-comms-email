@@ -75,16 +75,18 @@ public class EmailServiceImpl implements EmailService {
 
     private void sendEmail(String type, String to, String subject, String body) {
         Destination destination = new Destination().withToAddresses(to);
-        Content subjectContent = new Content().withData(subject);
-        Content bodyContent = new Content().withData(body);
+        Content subjectContent = new Content().withCharset("UTF-8").withData(subject);
+        Content htmlBodyContent = new Content().withCharset("UTF-8").withData(body);
 
-        Body emailBody = new Body().withHtml(bodyContent);
-        Message message = new Message().withSubject(subjectContent).withBody(emailBody);
+        Body emailBody = new Body().withHtml(htmlBodyContent);
+        Message message = new Message()
+                .withBody(emailBody)
+                .withSubject(subjectContent);
 
         SendEmailRequest sendEmailRequest = new SendEmailRequest()
-                .withSource(fromEmail)
                 .withDestination(destination)
-                .withMessage(message);
+                .withMessage(message)
+                .withSource(fromEmail);
 
         try {
             sesClient.sendEmail(sendEmailRequest);

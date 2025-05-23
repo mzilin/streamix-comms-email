@@ -1,6 +1,8 @@
+import org.gradle.api.JavaVersion
+
 plugins {
 	id 'java'
-	id 'org.springframework.boot' version '3.2.5'
+	id 'org.springframework.boot' version '3.4.5'
 	id 'io.spring.dependency-management' version '1.1.4'
 }
 
@@ -8,7 +10,8 @@ group = 'com.mariuszilinskas.vsp'
 version = '1.0.1'
 
 java {
-	sourceCompatibility = '17'
+	sourceCompatibility = JavaVersion.VERSION_21
+	targetCompatibility = JavaVersion.VERSION_21
 }
 
 configurations {
@@ -22,7 +25,7 @@ repositories {
 }
 
 ext {
-	set('springCloudVersion', "2023.0.1")
+	set('springCloudVersion', "2024.0.0")
 }
 
 dependencies {

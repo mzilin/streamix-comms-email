@@ -1,10 +1,10 @@
-package com.mariuszilinskas.vsp.emailservice.service;
+package com.mariuszilinskas.vsp.comms.email.service;
 
 import com.amazonaws.services.simpleemail.AmazonSimpleEmailService;
 import com.amazonaws.services.simpleemail.model.*;
-import com.mariuszilinskas.vsp.emailservice.dto.EmailRequest;
-import com.mariuszilinskas.vsp.emailservice.dto.ResetPasswordRequest;
-import com.mariuszilinskas.vsp.emailservice.dto.VerifyEmailRequest;
+import com.mariuszilinskas.vsp.comms.email.dto.EmailRequest;
+import com.mariuszilinskas.vsp.comms.email.dto.ResetPasswordRequest;
+import com.mariuszilinskas.vsp.comms.email.dto.VerifyEmailRequest;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

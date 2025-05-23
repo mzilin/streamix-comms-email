@@ -1,4 +1,4 @@
-package com.mariuszilinskas.vsp.emailservice;
+package com.mariuszilinskas.vsp.comms.email;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

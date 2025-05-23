@@ -1,9 +1,9 @@
-package com.mariuszilinskas.vsp.emailservice.consumer;
+package com.mariuszilinskas.vsp.comms.email.consumer;
 
-import com.mariuszilinskas.vsp.emailservice.dto.EmailRequest;
-import com.mariuszilinskas.vsp.emailservice.dto.ResetPasswordRequest;
-import com.mariuszilinskas.vsp.emailservice.dto.VerifyEmailRequest;
-import com.mariuszilinskas.vsp.emailservice.service.EmailService;
+import com.mariuszilinskas.vsp.comms.email.dto.EmailRequest;
+import com.mariuszilinskas.vsp.comms.email.dto.ResetPasswordRequest;
+import com.mariuszilinskas.vsp.comms.email.dto.VerifyEmailRequest;
+import com.mariuszilinskas.vsp.comms.email.service.EmailService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

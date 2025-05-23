@@ -1,18 +1,18 @@
 # Server properties
 server:
-  port: 8094
+  port: 8160
 
 # Information for the info endpoint
 info:
   app:
     environment: DEV
-    name: Email Service
-    description: Email Service Local Instance
+    name: email-service
+    description: Email Service - Local Instance
 
 # Spring application properties
 spring:
   application:
-    name: emails
+    name: email-service
   profiles:
     active: dev
   config:

@@ -1,4 +1,4 @@
-package com.mariuszilinskas.vsp.emailservice.config;
+package com.mariuszilinskas.vsp.comms.email.config;
 
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;

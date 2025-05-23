@@ -1,4 +1,4 @@
-package com.mariuszilinskas.vsp.emailservice.util;
+package com.mariuszilinskas.vsp.comms.email.util;
 
 public abstract class EmailUtils {
 

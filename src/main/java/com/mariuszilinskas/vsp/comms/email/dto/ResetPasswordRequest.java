@@ -1,4 +1,4 @@
-package com.mariuszilinskas.vsp.emailservice.dto;
+package com.mariuszilinskas.vsp.comms.email.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;

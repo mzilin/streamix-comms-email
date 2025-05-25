@@ -20,43 +20,44 @@ spring:
       - optional:configserver:discovery://config-server
       - optional:file:./env.properties
   rabbitmq:
-    host: ${RMQ_HOST:localhost}
-    port: ${RMQ_PORT:5672}
-    username: ${RMQ_USERNAME:guest}
-    password: ${RMQ_PASSWORD:guest}
+    host: ${RMQ_HOST}
+    port: ${RMQ_PORT}
+    username: ${RMQ_USERNAME}
+    password: ${RMQ_PASSWORD}
 
 # AWS configuration
 aws:
-  accessKey: ${AWS_ACCESS_KEY:dummy-key}
-  secretKey: ${AWS_SECRET_KEY:dummy-secret}
+  accessKey: ${AWS_ACCESS_KEY}
+  secretKey: ${AWS_SECRET_KEY}
   ses:
-    region: ${AWS_SES_REGION:dummy-region}
+    region: ${AWS_SES_REGION}
 
 # Email configuration
 email:
-  fromEmail: ${FROM_EMAIL:test@example.com}
+  fromEmail: ${FROM_EMAIL}
 
 # Frontend configuration
 frontend:
-  baseUrl: ${FRONTEND_BASE_URL:http://localhost:3077}
+  baseUrl: ${FRONTEND_BASE_URL}
 
 # Eureka configuration
 eureka:
   client:
-    fetchRegistry: ${EUREKA_DISCOVERY_ENABLED:false}
-    registerWithEureka: ${EUREKA_DISCOVERY_ENABLED:false}
+    fetchRegistry: true
+    registerWithEureka: true
     serviceUrl:
-      defaultZone: ${EUREKA_CLIENT_DEFAULT_ZONE:http://localhost:8761/eureka/}
+      defaultZone: ${EUREKA_CLIENT_DEFAULT_ZONE}
   instance:
     preferIpAddress: true
 
 # RabbitMQ settings
 rabbitmq:
-  exchange: ${RMQ_EXCHANGE:dummy-exchange}
+  exchange: ${RMQ_EXCHANGE}
   queues:
-    platform-emails: ${RMQ_PLATFORM_EMAILS_Q:dummy-queue}
+    platform-emails: ${RMQ_PLATFORM_EMAILS_Q}
   routing-keys:
-    platform-emails: ${RMQ_PLATFORM_EMAILS_RK:dummy-key}
+    platform-emails: ${RMQ_PLATFORM_EMAILS_RK}
+
 # Management properties
 management:
   info:

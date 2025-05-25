@@ -6,57 +6,57 @@ server:
 info:
   app:
     environment: DEV
-    name: email-service
+    name: ${spring.application.name}
     description: Email Service - Local Instance
 
 # Spring application properties
 spring:
   application:
-    name: email-service
+    name: comms-email
   profiles:
     active: dev
   config:
     import:
-      - optional:configserver:${CONFIG_SERVER_URL}
+      - optional:configserver:discovery://config-server
       - optional:file:./env.properties
   rabbitmq:
-    host: ${RMQ_HOST}
-    port: ${RMQ_PORT}
-    username: ${RMQ_USERNAME}
-    password: ${RMQ_PASSWORD}
+    host: ${RMQ_HOST:localhost}
+    port: ${RMQ_PORT:5672}
+    username: ${RMQ_USERNAME:guest}
+    password: ${RMQ_PASSWORD:guest}
 
 # AWS configuration
 aws:
-  accessKey: ${AWS_ACCESS_KEY}
-  secretKey: ${AWS_SECRET_KEY}
+  accessKey: ${AWS_ACCESS_KEY:dummy-key}
+  secretKey: ${AWS_SECRET_KEY:dummy-secret}
   ses:
-    region: ${AWS_SES_REGION}
+    region: ${AWS_SES_REGION:dummy-region}
 
 # Email configuration
 email:
-  fromEmail: ${FROM_EMAIL}
+  fromEmail: ${FROM_EMAIL:test@example.com}
 
 # Frontend configuration
 frontend:
-  baseUrl: ${FRONTEND_BASE_URL}
+  baseUrl: ${FRONTEND_BASE_URL:http://localhost:3077}
 
 # Eureka configuration
 eureka:
   client:
-    fetchRegistry: true
-    registerWithEureka: true
+    fetchRegistry: ${EUREKA_DISCOVERY_ENABLED:false}
+    registerWithEureka: ${EUREKA_DISCOVERY_ENABLED:false}
     serviceUrl:
-      defaultZone: ${EUREKA_CLIENT_DEFAULT_ZONE}
+      defaultZone: ${EUREKA_CLIENT_DEFAULT_ZONE:http://localhost:8761/eureka/}
   instance:
     preferIpAddress: true
 
 # RabbitMQ settings
 rabbitmq:
-  exchange: ${RMQ_EXCHANGE}
+  exchange: ${RMQ_EXCHANGE:dummy-exchange}
   queues:
-    platform-emails: ${RMQ_PLATFORM_EMAILS_Q}
+    platform-emails: ${RMQ_PLATFORM_EMAILS_Q:dummy-queue}
   routing-keys:
-    platform-emails: ${RMQ_PLATFORM_EMAILS_RK}
+    platform-emails: ${RMQ_PLATFORM_EMAILS_RK:dummy-key}
 # Management properties
 management:
   info:
@@ -71,4 +71,4 @@ logging:
   level:
     root: INFO
     org.springframework.web: DEBUG
-    org.springframework.security: DEBUG
+    com.mariuszilinskas.vsp: DEBUG

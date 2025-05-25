@@ -6,13 +6,13 @@ server:
 info:
   app:
     environment: DEV
-    name: email-service
+    name: ${spring.application.name}
     description: Email Service - Local Instance
 
 # Spring application properties
 spring:
   application:
-    name: email-service
+    name: comms-email
   profiles:
     active: dev
   config:

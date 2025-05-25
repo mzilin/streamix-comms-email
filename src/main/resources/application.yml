@@ -17,7 +17,7 @@ spring:
     active: dev
   config:
     import:
-      - optional:configserver:${CONFIG_SERVER_URL}
+      - optional:configserver:discovery://config-server
       - optional:file:./env.properties
   rabbitmq:
     host: ${RMQ_HOST}
@@ -71,4 +71,4 @@ logging:
   level:
     root: INFO
     org.springframework.web: DEBUG
-    org.springframework.security: DEBUG
+    com.mariuszilinskas.vsp: DEBUG

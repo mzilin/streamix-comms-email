@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 /**
  * Test class for the Spring application context and bean configuration in the EmailService application.
  */
-@SpringBootTest(properties = "eureka.client.enabled=false")
+@SpringBootTest
 class EmailServiceApplicationTests {
 
 	@Autowired

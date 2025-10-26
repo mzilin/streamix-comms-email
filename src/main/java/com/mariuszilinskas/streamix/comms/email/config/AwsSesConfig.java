@@ -1,4 +1,4 @@
-package com.mariuszilinskas.vsp.comms.email.config;
+package com.mariuszilinskas.streamix.comms.email.config;
 
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;

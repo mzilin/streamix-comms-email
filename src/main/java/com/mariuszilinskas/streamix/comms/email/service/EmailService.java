@@ -1,6 +1,6 @@
-package com.mariuszilinskas.vsp.comms.email.service;
+package com.mariuszilinskas.streamix.comms.email.service;
 
-import com.mariuszilinskas.vsp.comms.email.dto.*;
+import com.mariuszilinskas.streamix.comms.email.dto.*;
 
 public interface EmailService {
 

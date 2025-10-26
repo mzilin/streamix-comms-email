@@ -1,10 +1,10 @@
-package com.mariuszilinskas.vsp.comms.email;
+package com.mariuszilinskas.streamix.comms.email;
 
 import com.amazonaws.services.simpleemail.AmazonSimpleEmailService;
-import com.mariuszilinskas.vsp.comms.email.config.AwsSesConfig;
-import com.mariuszilinskas.vsp.comms.email.config.RabbitMQConfig;
-import com.mariuszilinskas.vsp.comms.email.consumer.RabbitMQConsumer;
-import com.mariuszilinskas.vsp.comms.email.service.EmailService;
+import com.mariuszilinskas.streamix.comms.email.config.AwsSesConfig;
+import com.mariuszilinskas.streamix.comms.email.config.RabbitMQConfig;
+import com.mariuszilinskas.streamix.comms.email.consumer.RabbitMQConsumer;
+import com.mariuszilinskas.streamix.comms.email.service.EmailService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -1,4 +1,4 @@
-package com.mariuszilinskas.vsp.comms.email.dto;
+package com.mariuszilinskas.streamix.comms.email.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

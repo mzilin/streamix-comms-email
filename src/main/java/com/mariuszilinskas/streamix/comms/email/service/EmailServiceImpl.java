@@ -1,10 +1,10 @@
-package com.mariuszilinskas.vsp.comms.email.service;
+package com.mariuszilinskas.streamix.comms.email.service;
 
 import com.amazonaws.services.simpleemail.AmazonSimpleEmailService;
 import com.amazonaws.services.simpleemail.model.*;
-import com.mariuszilinskas.vsp.comms.email.dto.EmailRequest;
-import com.mariuszilinskas.vsp.comms.email.dto.ResetPasswordRequest;
-import com.mariuszilinskas.vsp.comms.email.dto.VerifyEmailRequest;
+import com.mariuszilinskas.streamix.comms.email.dto.EmailRequest;
+import com.mariuszilinskas.streamix.comms.email.dto.ResetPasswordRequest;
+import com.mariuszilinskas.streamix.comms.email.dto.VerifyEmailRequest;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,7 +47,7 @@ public class EmailServiceImpl implements EmailService {
     public void sendWelcomeEmail(EmailRequest request) {
         ModelMap model = initialiseModelMap(request);
         String body = buildEmail("welcome.html", model);
-        sendEmail("Welcome", request.getEmail(), "Welcome to VSP!", body);
+        sendEmail("Welcome", request.getEmail(), "Welcome to Streamix!", body);
     }
 
     @Override
@@ -74,7 +74,7 @@ public class EmailServiceImpl implements EmailService {
     }
 
     private void sendEmail(String type, String to, String subject, String body) {
-        String fromFormatted = "VSP <" + fromEmail + ">";
+        String fromFormatted = "Streamix <" + fromEmail + ">";
 
         Destination destination = new Destination().withToAddresses(to);
         Content subjectContent = new Content().withCharset("UTF-8").withData(subject);

@@ -1,4 +1,4 @@
-package com.mariuszilinskas.vsp.comms.email.config;
+package com.mariuszilinskas.streamix.comms.email.config;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.amqp.core.*;

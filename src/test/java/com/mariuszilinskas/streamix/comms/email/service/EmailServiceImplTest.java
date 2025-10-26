@@ -1,11 +1,11 @@
-package com.mariuszilinskas.vsp.comms.email.service;
+package com.mariuszilinskas.streamix.comms.email.service;
 
 import com.amazonaws.services.simpleemail.AmazonSimpleEmailService;
 import com.amazonaws.services.simpleemail.model.SendEmailRequest;
 import com.amazonaws.services.simpleemail.model.SendEmailResult;
-import com.mariuszilinskas.vsp.comms.email.dto.EmailRequest;
-import com.mariuszilinskas.vsp.comms.email.dto.ResetPasswordRequest;
-import com.mariuszilinskas.vsp.comms.email.dto.VerifyEmailRequest;
+import com.mariuszilinskas.streamix.comms.email.dto.EmailRequest;
+import com.mariuszilinskas.streamix.comms.email.dto.ResetPasswordRequest;
+import com.mariuszilinskas.streamix.comms.email.dto.VerifyEmailRequest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

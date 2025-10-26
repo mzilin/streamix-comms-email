@@ -1,4 +1,4 @@
-package com.mariuszilinskas.vsp.comms.email.util;
+package com.mariuszilinskas.streamix.comms.email.util;
 
 public abstract class EmailUtils {
 

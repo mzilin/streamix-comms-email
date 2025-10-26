@@ -1,13 +1,13 @@
-# Video Streaming Platform – Email Service
+# Streamix – Email Service
 
-![Build](https://img.shields.io/github/actions/workflow/status/mzilin/vsp-comms-email/build.yml?label=Build&logo=github&logoColor=white&style=flat)
-![Coverage](https://img.shields.io/codecov/c/github/mzilin/vsp-comms-email?label=Coverage&logo=codecov&logoColor=white&style=flat)
+![Build](https://img.shields.io/github/actions/workflow/status/mzilin/streamix-comms-email/build.yml?label=Build&logo=github&logoColor=white&style=flat)
+![Coverage](https://img.shields.io/codecov/c/github/mzilin/streamix-comms-email?label=Coverage&logo=codecov&logoColor=white&style=flat)
 ![Status](https://img.shields.io/badge/status-in_progress-yellow?label=Status)
 
 
-This repository contains the **Email Service** microservice for the **Video Streaming Platform**, deployed in the **Comms** cluster. It is responsible for sending transactional and marketing emails that keep users engaged and informed.
+This repository contains the **Email Service** microservice for the **Streamix** (Video Streaming Platform), deployed in the **Comms** cluster. It is responsible for sending transactional and marketing emails that keep users engaged and informed.
 
-For a complete system overview and links to all microservices, please refer to the [Microservices Hub Repository](https://github.com/mzilin/vsp-microservices-hub).
+For a complete system overview and links to all microservices, please refer to the [Microservices Hub Repository](https://github.com/mzilin/streamix-microservices-hub).
 
 
 ## Table of Contents
@@ -97,12 +97,12 @@ Ensure you have the following installed on your machine:
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/mzilin/vsp-comms-email.git
+    git clone https://github.com/mzilin/streamix-comms-email.git
     ```
 
 2. Switch to the `main` branch:
     ```bash
-    cd vsp-comms-email
+    cd streamix-comms-email
     ```
 
 3. Build the project and run tests:

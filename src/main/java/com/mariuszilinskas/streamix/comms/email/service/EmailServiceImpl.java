@@ -5,10 +5,10 @@ import com.amazonaws.services.simpleemail.model.*;
 import com.mariuszilinskas.streamix.comms.email.dto.EmailRequest;
 import com.mariuszilinskas.streamix.comms.email.dto.ResetPasswordRequest;
 import com.mariuszilinskas.streamix.comms.email.dto.VerifyEmailRequest;
+import com.mariuszilinskas.streamix.comms.email.properties.EmailProperties;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
 import org.thymeleaf.TemplateEngine;
@@ -27,12 +27,7 @@ public class EmailServiceImpl implements EmailService {
     private static final Logger logger = LoggerFactory.getLogger(EmailServiceImpl.class);
     private final AmazonSimpleEmailService sesClient;
     private final TemplateEngine templateEngine;
-
-    @Value("${email.fromEmail}")
-    private String fromEmail;
-
-    @Value("${frontend.baseUrl}")
-    private String baseUrl;
+    private final EmailProperties emailProperties;
 
     @Override
     public void sendVerifyAccountEmail(VerifyEmailRequest request) {
@@ -53,7 +48,7 @@ public class EmailServiceImpl implements EmailService {
     @Override
     public void sendResetPasswordEmail(ResetPasswordRequest request) {
         ModelMap model = initialiseModelMap(request);
-        String resetLink = baseUrl + "/reset-password?token=" + request.getResetToken();
+        String resetLink = emailProperties.frontendBaseUrl() + "/reset-password?token=" + request.getResetToken();
         model.addAttribute("resetLink", resetLink);
 
         String body = buildEmail("resetPassword.html", model);
@@ -74,7 +69,7 @@ public class EmailServiceImpl implements EmailService {
     }
 
     private void sendEmail(String type, String to, String subject, String body) {
-        String fromFormatted = "Streamix <" + fromEmail + ">";
+        String fromFormatted = "Streamix <" + emailProperties.fromEmail() + ">";
 
         Destination destination = new Destination().withToAddresses(to);
         Content subjectContent = new Content().withCharset("UTF-8").withData(subject);

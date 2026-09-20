@@ -2,14 +2,14 @@
 server:
   port: 8160
 
-# Information for the info endpoint
+# Application metadata
 info:
   app:
     environment: DEV
     name: ${spring.application.name}
     description: Email Service - Local Instance
 
-# Spring application properties
+# Spring properties
 spring:
   application:
     name: comms-email
@@ -25,22 +25,7 @@ spring:
     username: ${RMQ_USERNAME}
     password: ${RMQ_PASSWORD}
 
-# AWS configuration
-aws:
-  accessKey: ${AWS_ACCESS_KEY}
-  secretKey: ${AWS_SECRET_KEY}
-  ses:
-    region: ${AWS_REGION}
-
-# Email configuration
-email:
-  fromEmail: ${FROM_EMAIL}
-
-# Frontend configuration
-frontend:
-  baseUrl: ${FRONTEND_BASE_URL}
-
-# Eureka configuration
+# Service discovery properties
 eureka:
   client:
     fetchRegistry: true
@@ -50,15 +35,24 @@ eureka:
   instance:
     preferIpAddress: true
 
-# RabbitMQ settings
+# Messaging properties
 rabbitmq:
-  exchange: ${RMQ_EXCHANGE}
   queues:
     platform-emails: ${RMQ_PLATFORM_EMAILS_Q}
-  routing-keys:
-    platform-emails: ${RMQ_PLATFORM_EMAILS_RK}
 
-# Management properties
+# AWS properties
+aws:
+  access-key: ${AWS_ACCESS_KEY}
+  secret-key: ${AWS_SECRET_KEY}
+  ses:
+    region: ${AWS_REGION}
+
+# Email properties
+email:
+  from-email: ${FROM_EMAIL}
+  frontend-base-url: ${FRONTEND_BASE_URL}
+
+# Management and observability properties
 management:
   info:
     env:
@@ -84,6 +78,7 @@ management:
       export:
         url: ${OTEL_METRICS_ENDPOINT}
 
+# Logging properties
 logging:
   level:
     root: INFO

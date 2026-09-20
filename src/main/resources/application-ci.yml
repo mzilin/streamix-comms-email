@@ -1,4 +1,4 @@
-# Spring application properties for CI
+# Spring configuration for CI
 spring:
   rabbitmq:
     host: localhost
@@ -6,36 +6,30 @@ spring:
     username: guest
     password: guest
 
-# AWS configuration for CI
-aws:
-  accessKey: dummy-key
-  secretKey: dummy-secret
-  ses:
-    region: dummy-region
-
-# Email configuration for CI
-email:
-  fromEmail: test@example.com
-
-# Frontend configuration for CI
-frontend:
-  baseUrl: http://localhost:3000
-
-# Eureka configuration for CI
+# Service discovery configuration for CI
 eureka:
   client:
     fetchRegistry: false
     registerWithEureka: false
 
-# RabbitMQ settings for CI
+# Messaging configuration for CI
 rabbitmq:
-  exchange: dummy-exchange
   queues:
     platform-emails: dummy-queue
-  routing-keys:
-    platform-emails: dummy-key
 
-# Management configuration for CI
+# AWS configuration for CI
+aws:
+  access-key: dummy-key
+  secret-key: dummy-secret
+  ses:
+    region: dummy-region
+
+# Email configuration for CI
+email:
+  from-email: test@example.com
+  frontend-base-url: http://localhost:3000
+
+# Observability configuration for CI
 management:
   opentelemetry:
     tracing:

@@ -5,28 +5,23 @@ import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.simpleemail.AmazonSimpleEmailService;
 import com.amazonaws.services.simpleemail.AmazonSimpleEmailServiceClientBuilder;
-import org.springframework.beans.factory.annotation.Value;
+import com.mariuszilinskas.streamix.comms.email.properties.AwsProperties;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
+@RequiredArgsConstructor
 public class AwsSesConfig {
 
-    @Value("${aws.accessKey}")
-    private String accessKey;
-
-    @Value("${aws.secretKey}")
-    private String secretKey;
-
-    @Value("${aws.ses.region}")
-    private String region;
+    private final AwsProperties awsProperties;
 
     @Bean
     public AmazonSimpleEmailService sesClient() {
-        AWSCredentials awsCredentials = new BasicAWSCredentials(accessKey, secretKey);
+        AWSCredentials credentials = new BasicAWSCredentials(awsProperties.accessKey(), awsProperties.secretKey());
         return AmazonSimpleEmailServiceClientBuilder.standard()
-                .withCredentials(new AWSStaticCredentialsProvider(awsCredentials))
-                .withRegion(region)
+                .withCredentials(new AWSStaticCredentialsProvider(credentials))
+                .withRegion(awsProperties.ses().region())
                 .build();
     }
 

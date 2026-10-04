@@ -59,6 +59,7 @@ This project relies on a set of key libraries and frameworks that support its co
   - **Actuator**: Exposes app health, metrics, and monitoring endpoints.
   - **OpenTelemetry**: Provides distributed tracing and metrics export via OTLP for observability.
   - **RabbitMQ (AMQP)**: Facilitates robust, asynchronous messaging between microservices, enhancing scalability and decoupling.
+  - **Data JPA**: Simplifies database integration by managing relational data access using the Java Persistence API.
   - **Validation**: Provides declarative validation using JSR-380 annotations.
   - **Web**: Supports building RESTful endpoints and traditional MVC-based web applications.
   - **Thymeleaf**: Enables dynamic, template-based rendering for HTML emails and views.
@@ -66,6 +67,10 @@ This project relies on a set of key libraries and frameworks that support its co
 - **Spring Cloud**
   - **Config Client**: Integrates with a centralised Spring Cloud Config Server for dynamic configuration management.
   - **Netflix Eureka Client**: Integrates with the Eureka Server for service registration and discovery.
+
+- **Database**
+  - **Flyway**: Manages and tracks database migrations, ensuring that schema changes are version-controlled and consistently applied across environments.
+  - **PostgreSQL**: A robust, open-source relational database system known for its advanced features and proven architecture.
 
 - **AWS**
   - **AWS Java SDK SES**: Provides integration with Amazon SES for sending emails using AWS's secure and scalable infrastructure.

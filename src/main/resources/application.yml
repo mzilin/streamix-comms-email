@@ -1,58 +1,63 @@
-# Server properties
-server:
-  port: 8160
-
 # Application metadata
 info:
   app:
-    environment: DEV
+    environment: ${spring.profiles.active}
     name: ${spring.application.name}
-    description: Email Service - Local Instance
+    description: Streamix Email Service
 
-# Spring properties
+# Spring application and infrastructure configuration
 spring:
   application:
     name: comms-email
-  profiles:
-    active: dev
   config:
     import:
       - optional:configserver:discovery://config-server
-      - optional:file:../env/dev.properties
+  datasource:
+    url: jdbc:postgresql://localhost:5433/streamixdb
+    driver-class-name: org.postgresql.Driver
+    username: streamix
+    password: streamix
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        default_schema: streamix_email
   rabbitmq:
-    host: ${RMQ_HOST}
-    port: ${RMQ_PORT}
-    username: ${RMQ_USERNAME}
-    password: ${RMQ_PASSWORD}
+    host: localhost
+    port: 5672
+    username: streamix
+    password: streamix
 
-# Service discovery properties
+# Service discovery configuration
 eureka:
   client:
-    fetchRegistry: true
-    registerWithEureka: true
-    serviceUrl:
-      defaultZone: ${EUREKA_CLIENT_DEFAULT_ZONE}
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      default-zone: http://localhost:8761/eureka
   instance:
-    preferIpAddress: true
+    prefer-ip-address: true
 
-# Messaging properties
+# Messaging configuration
 rabbitmq:
   queues:
-    platform-emails: ${RMQ_PLATFORM_EMAILS_Q}
+    platform-emails: platform-emails
 
-# AWS properties
+# AWS configuration
 aws:
   access-key: ${AWS_ACCESS_KEY}
   secret-key: ${AWS_SECRET_KEY}
   ses:
-    region: ${AWS_REGION}
+    region: eu-west-2
 
-# Email properties
+# Email configuration
 email:
   from-email: ${FROM_EMAIL}
-  frontend-base-url: ${FRONTEND_BASE_URL}
+  frontend-base-url: http://localhost:3077
 
-# Management and observability properties
+# Actuator and observability configuration
 management:
   info:
     env:
@@ -60,10 +65,10 @@ management:
   endpoints:
     web:
       exposure:
-        include: info, health, refresh, prometheus
+        include: info, health, prometheus
   endpoint:
     health:
-      show-details: always
+      show-details: when-authorized
   opentelemetry:
     resource-attributes:
       service.name: ${spring.application.name}
@@ -72,15 +77,15 @@ management:
     tracing:
       export:
         otlp:
-          endpoint: ${OTEL_TRACES_ENDPOINT}
+          endpoint: http://localhost:4318/v1/traces
   otlp:
     metrics:
       export:
-        url: ${OTEL_METRICS_ENDPOINT}
+        url: http://localhost:4318/v1/metrics
 
-# Logging properties
+# Application logging configuration
 logging:
   level:
     root: INFO
-    org.springframework.web: DEBUG
-    com.mariuszilinskas.streamix: DEBUG
+    org.springframework.web: INFO
+    com.mariuszilinskas.streamix: INFO

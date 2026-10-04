@@ -1,42 +1,36 @@
-# Spring configuration for CI
+# CI application and infrastructure configuration
 spring:
-  rabbitmq:
-    host: localhost
-    port: 5672
-    username: guest
-    password: guest
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create-drop
 
-# Service discovery configuration for CI
+# CI service discovery configuration
 eureka:
   client:
-    fetchRegistry: false
-    registerWithEureka: false
+    fetch-registry: false
+    register-with-eureka: false
 
-# Messaging configuration for CI
-rabbitmq:
-  queues:
-    platform-emails: dummy-queue
-
-# AWS configuration for CI
+# CI AWS configuration
 aws:
   access-key: dummy-key
   secret-key: dummy-secret
-  ses:
-    region: dummy-region
 
-# Email configuration for CI
+# CI Email configuration
 email:
   from-email: test@example.com
-  frontend-base-url: http://localhost:3000
 
-# Observability configuration for CI
+# CI observability configuration
 management:
-  opentelemetry:
-    tracing:
-      export:
-        otlp:
-          endpoint: http://localhost:4318/v1/traces
+  tracing:
+    export:
+      enabled: false
   otlp:
     metrics:
       export:
-        url: http://localhost:4318/v1/metrics
+        enabled: false

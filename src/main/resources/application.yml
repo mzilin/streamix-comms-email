@@ -1,64 +1,63 @@
-# Server properties
-server:
-  port: 8160
-
-# Information for the info endpoint
+# Application metadata
 info:
   app:
-    environment: DEV
+    environment: ${spring.profiles.active}
     name: ${spring.application.name}
-    description: Email Service - Local Instance
+    description: Streamix Email Service
 
-# Spring application properties
+# Spring application and infrastructure configuration
 spring:
   application:
     name: comms-email
-  profiles:
-    active: dev
   config:
     import:
       - optional:configserver:discovery://config-server
-      - optional:file:../env/dev.properties
+  datasource:
+    url: jdbc:postgresql://localhost:5433/streamixdb
+    driver-class-name: org.postgresql.Driver
+    username: streamix
+    password: streamix
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        default_schema: streamix_email
   rabbitmq:
-    host: ${RMQ_HOST}
-    port: ${RMQ_PORT}
-    username: ${RMQ_USERNAME}
-    password: ${RMQ_PASSWORD}
+    host: localhost
+    port: 5672
+    username: streamix
+    password: streamix
+
+# Service discovery configuration
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      default-zone: http://localhost:8761/eureka
+  instance:
+    prefer-ip-address: true
+
+# Messaging configuration
+rabbitmq:
+  queues:
+    platform-emails: platform-emails
 
 # AWS configuration
 aws:
-  accessKey: ${AWS_ACCESS_KEY}
-  secretKey: ${AWS_SECRET_KEY}
+  access-key: ${AWS_ACCESS_KEY}
+  secret-key: ${AWS_SECRET_KEY}
   ses:
-    region: ${AWS_REGION}
+    region: eu-west-2
 
 # Email configuration
 email:
-  fromEmail: ${FROM_EMAIL}
+  from-email: ${FROM_EMAIL}
+  frontend-base-url: http://localhost:3077
 
-# Frontend configuration
-frontend:
-  baseUrl: ${FRONTEND_BASE_URL}
-
-# Eureka configuration
-eureka:
-  client:
-    fetchRegistry: true
-    registerWithEureka: true
-    serviceUrl:
-      defaultZone: ${EUREKA_CLIENT_DEFAULT_ZONE}
-  instance:
-    preferIpAddress: true
-
-# RabbitMQ settings
-rabbitmq:
-  exchange: ${RMQ_EXCHANGE}
-  queues:
-    platform-emails: ${RMQ_PLATFORM_EMAILS_Q}
-  routing-keys:
-    platform-emails: ${RMQ_PLATFORM_EMAILS_RK}
-
-# Management properties
+# Actuator and observability configuration
 management:
   info:
     env:
@@ -66,10 +65,10 @@ management:
   endpoints:
     web:
       exposure:
-        include: info, health, refresh, prometheus
+        include: info, health, prometheus
   endpoint:
     health:
-      show-details: always
+      show-details: when-authorized
   opentelemetry:
     resource-attributes:
       service.name: ${spring.application.name}
@@ -78,14 +77,15 @@ management:
     tracing:
       export:
         otlp:
-          endpoint: ${OTEL_TRACES_ENDPOINT}
+          endpoint: http://localhost:4318/v1/traces
   otlp:
     metrics:
       export:
-        url: ${OTEL_METRICS_ENDPOINT}
+        url: http://localhost:4318/v1/metrics
 
+# Application logging configuration
 logging:
   level:
     root: INFO
-    org.springframework.web: DEBUG
-    com.mariuszilinskas.streamix: DEBUG
+    org.springframework.web: INFO
+    com.mariuszilinskas.streamix: INFO

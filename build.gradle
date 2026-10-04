@@ -37,7 +37,8 @@ ext {
 
 dependencies {
 	// Core Spring Boot
-	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-opentelemetry'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
@@ -47,8 +48,11 @@ dependencies {
 	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
 
 	// Data & Persistence
+    implementation 'org.flywaydb:flyway-core:9.22.3'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation group: 'com.amazonaws', name: 'aws-java-sdk-ses', version: '1.12.760'
+    runtimeOnly 'org.postgresql:postgresql'
+    runtimeOnly 'com.h2database:h2'
 
 	// Messaging & Events
 	implementation 'org.springframework.boot:spring-boot-starter-amqp'
@@ -61,9 +65,11 @@ dependencies {
 	implementation 'org.jetbrains:annotations:24.0.1'
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
+	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
 	// Testing
+    testImplementation 'com.h2database:h2'
 	testImplementation 'org.mockito:mockito-core:5.3.1'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
@@ -84,6 +90,7 @@ compileTestJava {
 
 test {
 	useJUnitPlatform()
+	systemProperty "spring.profiles.active", System.getenv("SPRING_PROFILES_ACTIVE") ?: ""
 	testLogging {
 		events "passed", "skipped", "failed"
 	}

@@ -6,6 +6,7 @@ import com.amazonaws.services.simpleemail.model.SendEmailResult;
 import com.mariuszilinskas.streamix.comms.email.dto.EmailRequest;
 import com.mariuszilinskas.streamix.comms.email.dto.ResetPasswordRequest;
 import com.mariuszilinskas.streamix.comms.email.dto.VerifyEmailRequest;
+import com.mariuszilinskas.streamix.comms.email.properties.EmailProperties;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -14,8 +15,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.thymeleaf.spring6.SpringTemplateEngine;
 import org.thymeleaf.context.Context;
-
-import java.lang.reflect.Field;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
@@ -29,24 +28,17 @@ public class EmailServiceImplTest {
     @Mock
     private SpringTemplateEngine templateEngine;
 
+    @Mock
+    private EmailProperties emailProperties;
+
     @InjectMocks
     private EmailServiceImpl emailService;
 
     // ------------------------------------
 
     @BeforeEach
-    void setup() throws NoSuchFieldException, IllegalAccessException {
-        // Setting values for @Value fields
-        setField(emailService, "fromEmail", "noreply@example.com");
-        setField(emailService, "baseUrl", "https://website.com");
-    }
-
-    // Utility method to set value for @Value annotated private fields
-    private void setField(Object service, String fieldName, Object value)
-            throws NoSuchFieldException, IllegalAccessException {
-        Field field = service.getClass().getDeclaredField(fieldName);
-        field.setAccessible(true);
-        field.set(service, value);
+    void setup() {
+        when(emailProperties.fromEmail()).thenReturn("noreply@example.com");
     }
 
     // ------------------------------------
@@ -100,6 +92,7 @@ public class EmailServiceImplTest {
         request.setEmail("test@example.com");
         request.setResetToken("kjghke4htlk3jgt5k3");
 
+        when(emailProperties.frontendBaseUrl()).thenReturn("https://website.com");
         when(sesClient.sendEmail(any(SendEmailRequest.class))).thenReturn(new SendEmailResult());
         when(templateEngine.process(any(String.class), any(Context.class))).thenReturn("Mock template content");
 

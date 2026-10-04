@@ -90,6 +90,7 @@ compileTestJava {
 
 test {
 	useJUnitPlatform()
+	systemProperty "spring.profiles.active", System.getenv("SPRING_PROFILES_ACTIVE") ?: ""
 	testLogging {
 		events "passed", "skipped", "failed"
 	}

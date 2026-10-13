@@ -18,4 +18,3 @@ public class VerifyEmailRequest extends EmailRequest {
     private String verificationToken;
 
 }
-

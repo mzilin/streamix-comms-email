@@ -5,6 +5,7 @@ import com.amazonaws.services.simpleemail.model.*;
 import com.mariuszilinskas.streamix.comms.email.dto.EmailRequest;
 import com.mariuszilinskas.streamix.comms.email.dto.ResetPasswordRequest;
 import com.mariuszilinskas.streamix.comms.email.dto.VerifyEmailRequest;
+import com.mariuszilinskas.streamix.comms.email.exception.EmailSendException;
 import com.mariuszilinskas.streamix.comms.email.properties.EmailProperties;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -32,7 +33,8 @@ public class EmailServiceImpl implements EmailService {
     @Override
     public void sendVerifyAccountEmail(VerifyEmailRequest request) {
         ModelMap model = initialiseModelMap(request);
-        model.addAttribute("passcode", request.getPasscode());
+        String verificationUrl = emailProperties.frontendBaseUrl() + "/verify?token=" + request.getVerificationToken();
+        model.addAttribute("verificationUrl", verificationUrl);
 
         String body = buildEmail("verifyAccount.html", model);
         sendEmail("Verify Account", request.getEmail(), "Verify Your Account", body);
@@ -89,7 +91,8 @@ public class EmailServiceImpl implements EmailService {
             sesClient.sendEmail(sendEmailRequest);
             logger.info("{} Email sent successfully to {}", type, to);
         } catch (Exception ex) {
-            logger.error("{} email could not be sent. Error message: {}", type, ex.getMessage());
+            logger.error("{} email could not be sent", type);
+            throw new EmailSendException("Failed to send " + type + " email", ex);
         }
     }
 

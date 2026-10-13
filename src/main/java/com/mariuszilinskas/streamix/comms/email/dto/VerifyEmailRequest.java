@@ -14,8 +14,7 @@ import static com.mariuszilinskas.streamix.web.constant.ValidationMessages.CANNO
 @AllArgsConstructor
 public class VerifyEmailRequest extends EmailRequest {
 
-    @NotBlank(message = "passcode " + CANNOT_BE_BLANK)
-    private String passcode;
+    @NotBlank(message = "verificationToken " + CANNOT_BE_BLANK)
+    private String verificationToken;
 
 }
-

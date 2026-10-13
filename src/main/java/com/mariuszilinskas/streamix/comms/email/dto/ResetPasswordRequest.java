@@ -18,4 +18,3 @@ public class ResetPasswordRequest extends EmailRequest {
     private String resetToken;
 
 }
-

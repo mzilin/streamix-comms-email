@@ -48,11 +48,11 @@ dependencies {
 	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
 
 	// Data & Persistence
-    implementation 'org.flywaydb:flyway-core:9.22.3'
+	implementation 'org.springframework.boot:spring-boot-starter-flyway'
+	runtimeOnly 'org.flywaydb:flyway-database-postgresql'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation group: 'com.amazonaws', name: 'aws-java-sdk-ses', version: '1.12.760'
     runtimeOnly 'org.postgresql:postgresql'
-    runtimeOnly 'com.h2database:h2'
 
 	// Messaging & Events
 	implementation 'org.springframework.boot:spring-boot-starter-amqp'
@@ -91,6 +91,7 @@ compileTestJava {
 test {
 	useJUnitPlatform()
 	systemProperty "spring.profiles.active", System.getenv("SPRING_PROFILES_ACTIVE") ?: ""
+	systemProperty "spring.flyway.enabled", System.getenv("TEST_FLYWAY_ENABLED") ?: "false"
 	testLogging {
 		events "passed", "skipped", "failed"
 	}

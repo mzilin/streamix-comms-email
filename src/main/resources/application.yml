@@ -50,7 +50,7 @@ eureka:
 # Messaging configuration
 rabbitmq:
   queues:
-    platform-emails: platform-emails
+    platform-emails: streamix.platform-emails
 
 # AWS configuration
 aws:

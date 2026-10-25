@@ -1,3 +1,7 @@
+# Server configuration
+server:
+  port: 8160
+
 # Application metadata
 info:
   app:
@@ -42,7 +46,7 @@ eureka:
   client:
     fetch-registry: true
     register-with-eureka: true
-    service-url:
+    serviceUrl:
       defaultZone: http://localhost:8761/eureka
   instance:
     prefer-ip-address: true

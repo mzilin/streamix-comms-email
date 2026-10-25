@@ -1,1 +1,1 @@
-CREATE SCHEMA IF NOT EXISTS streamix_email;
+CREATE SCHEMA streamix_email;

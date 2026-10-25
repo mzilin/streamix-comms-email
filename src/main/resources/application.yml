@@ -43,7 +43,7 @@ eureka:
     fetch-registry: true
     register-with-eureka: true
     service-url:
-      default-zone: http://localhost:8761/eureka
+      defaultZone: http://localhost:8761/eureka
   instance:
     prefer-ip-address: true
 
@@ -85,6 +85,10 @@ management:
       export:
         otlp:
           endpoint: http://localhost:4318/v1/traces
+    logging:
+      export:
+        otlp:
+          endpoint: http://localhost:4318/v1/logs
   otlp:
     metrics:
       export:

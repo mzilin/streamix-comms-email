@@ -5,7 +5,7 @@ server:
 # Application metadata
 info:
   app:
-    environment: ${spring.profiles.active}
+    environment: ${spring.profiles.active:default}
     name: ${spring.application.name}
     description: Streamix Email Service
 
@@ -46,7 +46,7 @@ eureka:
   client:
     fetch-registry: true
     register-with-eureka: true
-    serviceUrl:
+    service-url:
       defaultZone: http://localhost:8761/eureka
   instance:
     prefer-ip-address: true
@@ -84,7 +84,7 @@ management:
     resource-attributes:
       service.name: ${spring.application.name}
       service.namespace: streamix
-      deployment.environment: ${spring.profiles.active}
+      deployment.environment: ${spring.profiles.active:default}
     tracing:
       export:
         otlp:

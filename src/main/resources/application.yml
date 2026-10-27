@@ -84,9 +84,12 @@ management:
   endpoint:
     health:
       show-details: when-authorized
+  otlp:
+    metrics:
+      export:
+        url: http://localhost:4318/v1/metrics
   opentelemetry:
     resource-attributes:
-      service.name: ${spring.application.name}
       service.namespace: streamix
       deployment.environment: ${spring.profiles.active:default}
     tracing:
@@ -97,14 +100,17 @@ management:
       export:
         otlp:
           endpoint: http://localhost:4318/v1/logs
-  otlp:
-    metrics:
-      export:
-        url: http://localhost:4318/v1/metrics
+  tracing:
+    sampling:
+      probability: 1.0
 
 # Application logging configuration
 logging:
   level:
     root: INFO
-    org.springframework.web: INFO
     com.mariuszilinskas.streamix: INFO
+    com.netflix: WARN
+    org.apache.kafka: WARN
+    org.springframework.amqp: WARN
+    com.rabbitmq: WARN
+    org.springframework.web.servlet: WARN

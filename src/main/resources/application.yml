@@ -1,7 +1,11 @@
+# Server configuration
+server:
+  port: 8160
+
 # Application metadata
 info:
   app:
-    environment: ${spring.profiles.active}
+    environment: ${spring.profiles.active:default}
     name: ${spring.application.name}
     description: Streamix Email Service
 
@@ -17,6 +21,17 @@ spring:
     driver-class-name: org.postgresql.Driver
     username: streamix
     password: streamix
+  flyway:
+    enabled: true
+    schemas:
+      - streamix_email
+    default-schema: streamix_email
+    create-schemas: true
+    locations: classpath:db/migration
+    baseline-on-migrate: false
+    validate-on-migrate: true
+    out-of-order: false
+    encoding: UTF-8
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
@@ -36,14 +51,14 @@ eureka:
     fetch-registry: true
     register-with-eureka: true
     service-url:
-      default-zone: http://localhost:8761/eureka
+      defaultZone: http://localhost:8761/eureka
   instance:
     prefer-ip-address: true
 
 # Messaging configuration
 rabbitmq:
   queues:
-    platform-emails: platform-emails
+    platform-emails: streamix.platform-emails
 
 # AWS configuration
 aws:
@@ -69,23 +84,33 @@ management:
   endpoint:
     health:
       show-details: when-authorized
-  opentelemetry:
-    resource-attributes:
-      service.name: ${spring.application.name}
-      service.namespace: streamix
-      deployment.environment: ${spring.profiles.active}
-    tracing:
-      export:
-        otlp:
-          endpoint: http://localhost:4318/v1/traces
   otlp:
     metrics:
       export:
         url: http://localhost:4318/v1/metrics
+  opentelemetry:
+    resource-attributes:
+      service.namespace: streamix
+      deployment.environment: ${spring.profiles.active:default}
+    tracing:
+      export:
+        otlp:
+          endpoint: http://localhost:4318/v1/traces
+    logging:
+      export:
+        otlp:
+          endpoint: http://localhost:4318/v1/logs
+  tracing:
+    sampling:
+      probability: 1.0
 
 # Application logging configuration
 logging:
   level:
     root: INFO
-    org.springframework.web: INFO
     com.mariuszilinskas.streamix: INFO
+    com.netflix: WARN
+    org.apache.kafka: WARN
+    org.springframework.amqp: WARN
+    com.rabbitmq: WARN
+    org.springframework.web.servlet: WARN

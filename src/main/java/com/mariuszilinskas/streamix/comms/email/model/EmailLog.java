@@ -29,17 +29,13 @@ public class EmailLog {
     @Column(name = "status", nullable = false, length = 10)
     private EmailLogStatus status;
 
-    @Column(name = "error_message", length = 500)
-    private String errorMessage;
-
     @Column(name = "created_at", nullable = false, updatable = false)
     private Instant createdAt;
 
-    public EmailLog(UUID userId, String type, EmailLogStatus status, String errorMessage) {
+    public EmailLog(UUID userId, String type, EmailLogStatus status) {
         this.userId = userId;
         this.type = type;
         this.status = status;
-        this.errorMessage = errorMessage;
         this.createdAt = Instant.now();
     }
 }

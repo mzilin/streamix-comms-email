@@ -10,6 +10,7 @@ import com.mariuszilinskas.streamix.comms.email.model.EmailLog;
 import com.mariuszilinskas.streamix.comms.email.model.EmailLogStatus;
 import com.mariuszilinskas.streamix.comms.email.properties.EmailProperties;
 import com.mariuszilinskas.streamix.comms.email.repository.EmailLogRepository;
+import com.mariuszilinskas.streamix.cryptography.service.FieldEncryptionService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,9 +35,11 @@ public class EmailServiceImpl implements EmailService {
     private final TemplateEngine templateEngine;
     private final EmailProperties emailProperties;
     private final EmailLogRepository emailLogRepository;
+    private final FieldEncryptionService fieldEncryptionService;
 
     @Override
     public void sendVerifyAccountEmail(VerifyEmailRequest request) {
+        decryptRequest(request);
         ModelMap model = initialiseModelMap(request);
         String verificationUrl = emailProperties.frontendBaseUrl() + "/verify?token=" + request.getVerificationToken();
         model.addAttribute("verificationUrl", verificationUrl);
@@ -47,6 +50,7 @@ public class EmailServiceImpl implements EmailService {
 
     @Override
     public void sendWelcomeEmail(EmailRequest request) {
+        decryptRequest(request);
         ModelMap model = initialiseModelMap(request);
         String body = buildEmail("welcome.html", model);
         sendEmail(request, "Welcome to Streamix!", body);
@@ -54,12 +58,18 @@ public class EmailServiceImpl implements EmailService {
 
     @Override
     public void sendResetPasswordEmail(ResetPasswordRequest request) {
+        decryptRequest(request);
         ModelMap model = initialiseModelMap(request);
         String resetLink = emailProperties.frontendBaseUrl() + "/reset-password?token=" + request.getResetToken();
         model.addAttribute("resetLink", resetLink);
 
         String body = buildEmail("resetPassword.html", model);
         sendEmail(request, "Reset Your Password", body);
+    }
+
+    private void decryptRequest(EmailRequest request) {
+        request.setFirstName(fieldEncryptionService.decrypt(request.getFirstName()));
+        request.setEmail(fieldEncryptionService.decrypt(request.getEmail()));
     }
 
     private ModelMap initialiseModelMap(EmailRequest request) {

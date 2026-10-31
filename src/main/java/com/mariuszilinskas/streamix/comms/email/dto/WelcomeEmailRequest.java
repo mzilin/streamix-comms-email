@@ -4,12 +4,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.UUID;
+
 @Getter
 @Setter
 @NoArgsConstructor
 public class WelcomeEmailRequest extends EmailRequest {
 
-    public WelcomeEmailRequest(String firstName, String email) {
-        super("welcome", firstName, email);
+    public WelcomeEmailRequest(UUID userId, String firstName, String email) {
+        super("welcome", userId, firstName, email);
     }
 }

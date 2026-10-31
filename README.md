@@ -76,6 +76,7 @@ This project relies on a set of key libraries and frameworks that support its co
   - **AWS Java SDK SES**: Provides integration with Amazon SES for sending emails using AWS's secure and scalable infrastructure.
 
 - **Streamix Platform**
+  - **streamix-cryptography**: Shared cryptography utilities across Streamix microservices.
   - **streamix-observability**: Shared observability configuration across Streamix microservices.
   - **streamix-web-commons**: Shared web utilities and common components for Streamix services.
 
@@ -184,11 +185,11 @@ The service does not expose public REST endpoints. Instead, it consumes messages
 
 The consumer reads an `EmailRequest` payload and routes it to the appropriate handler based on the `type` field:
 
-| Message Type | Additional Fields | Description                                              |
-|--------------|-------------------|----------------------------------------------------------|
-| `verify`     | `passcode`        | Sends an account verification passcode to the user.      |
-| `welcome`    | —                 | Sends a welcome email after successful account creation. |
-| `reset`      | `resetToken`      | Sends a password reset link to the user.                 |
+| Message Type | Additional Fields     | Description                                              |
+|--------------|-----------------------|----------------------------------------------------------|
+| `verify`     | `verificationToken`   | Sends an account verification link to the user.          |
+| `welcome`    | —                     | Sends a welcome email after successful account creation. |
+| `reset`      | `resetToken`          | Sends a password reset link to the user.                 |
 
 
 ## Email Templates
@@ -197,7 +198,7 @@ Emails are rendered using **Thymeleaf** templates. All templates extend a shared
 
 | Template             | Triggered By  | Description                                                                |
 |----------------------|---------------|----------------------------------------------------------------------------|
-| `verifyAccount.html` | `verify`      | Account verification passcode email. Passcode is valid for 15 minutes.     |
+| `verifyAccount.html` | `verify`      | Account verification link email. Link is valid for 24 hours.               |
 | `welcome.html`       | `welcome`     | Welcome email sent after registration, highlighting key platform features. |
 | `resetPassword.html` | `reset`       | Password reset link email. Link is valid for 15 minutes.                   |
 

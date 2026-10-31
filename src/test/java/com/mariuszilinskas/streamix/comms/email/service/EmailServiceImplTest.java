@@ -12,6 +12,7 @@ import com.mariuszilinskas.streamix.comms.email.model.EmailLog;
 import com.mariuszilinskas.streamix.comms.email.model.EmailLogStatus;
 import com.mariuszilinskas.streamix.comms.email.properties.EmailProperties;
 import com.mariuszilinskas.streamix.comms.email.repository.EmailLogRepository;
+import com.mariuszilinskas.streamix.cryptography.service.FieldEncryptionService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -43,6 +44,9 @@ public class EmailServiceImplTest {
     @Mock
     private EmailLogRepository emailLogRepository;
 
+    @Mock
+    private FieldEncryptionService fieldEncryptionService;
+
     @InjectMocks
     private EmailServiceImpl emailService;
 
@@ -54,6 +58,7 @@ public class EmailServiceImplTest {
     void setup() {
         when(emailProperties.fromEmail()).thenReturn("noreply@example.com");
         when(templateEngine.process(any(String.class), any(Context.class))).thenReturn("Mock template content");
+        when(fieldEncryptionService.decrypt(anyString())).thenAnswer(inv -> inv.getArgument(0));
     }
 
     // ------------------------------------

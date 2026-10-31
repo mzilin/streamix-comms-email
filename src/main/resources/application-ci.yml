@@ -32,6 +32,10 @@ management:
   tracing:
     export:
       enabled: false
+  logging:
+    export:
+      otlp:
+        enabled: false
   otlp:
     metrics:
       export:

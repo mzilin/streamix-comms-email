@@ -4,10 +4,13 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.UUID;
 
 import static com.mariuszilinskas.streamix.web.constant.ValidationMessages.*;
 
@@ -31,6 +34,9 @@ public abstract class EmailRequest {
     @NotBlank(message = "type " + CANNOT_BE_BLANK)
     private String type;
 
+    @NotNull(message = "userId " + CANNOT_BE_NULL)
+    private UUID userId;
+
     @NotBlank(message = "firstName " + CANNOT_BE_BLANK)
     private String firstName;
 
@@ -39,5 +45,3 @@ public abstract class EmailRequest {
     private String email;
 
 }
-
-

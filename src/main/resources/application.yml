@@ -60,6 +60,9 @@ rabbitmq:
   queues:
     platform-emails: streamix.platform-emails
 
+# Security configuration
+cryptography: {}
+
 # AWS configuration
 aws:
   access-key: ${AWS_ACCESS_KEY}

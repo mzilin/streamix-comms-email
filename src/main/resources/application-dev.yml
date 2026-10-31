@@ -3,3 +3,8 @@ spring:
   config:
     import:
       - optional:file:../env/dev.properties
+
+# Local security configuration
+cryptography:
+  provider: local
+  encryption-key: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=

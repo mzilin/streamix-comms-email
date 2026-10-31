@@ -23,6 +23,11 @@ aws:
   access-key: dummy-key
   secret-key: dummy-secret
 
+# CI security configuration
+cryptography:
+  provider: local
+  encryption-key: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
+
 # CI Email configuration
 email:
   from-email: test@example.com

@@ -12,7 +12,6 @@ import com.mariuszilinskas.streamix.comms.email.model.EmailTemplate;
 import com.mariuszilinskas.streamix.comms.email.properties.EmailProperties;
 import com.mariuszilinskas.streamix.comms.email.repository.EmailLogRepository;
 import com.mariuszilinskas.streamix.cryptography.service.FieldEncryptionService;
-import com.mariuszilinskas.streamix.masking.service.MaskingService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,7 +39,6 @@ public class EmailServiceImpl implements EmailService {
     private final EmailProperties emailProperties;
     private final EmailLogRepository emailLogRepository;
     private final FieldEncryptionService fieldEncryptionService;
-    private final MaskingService maskingService;
 
     @Override
     public void sendVerifyAccountEmail(VerifyEmailRequest request) {

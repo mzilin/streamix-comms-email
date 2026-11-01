@@ -59,6 +59,7 @@ dependencies {
 
 	// Streamix Platform
 	implementation 'com.mariuszilinskas.streamix:streamix-cryptography:1.0.1'
+	implementation 'com.mariuszilinskas.streamix:streamix-data-masking:1.0.1'
 	implementation 'com.mariuszilinskas.streamix:streamix-observability:1.0.1'
 	implementation 'com.mariuszilinskas.streamix:streamix-web-commons:1.0.1'
 
